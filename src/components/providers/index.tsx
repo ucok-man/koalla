@@ -1,5 +1,5 @@
+import { TRPCReactProvider } from "@/trpc/client";
 import { ReactNode } from "react";
-import QueryProvider from "./query-provider";
 
 type Props = {
   children: ReactNode;
@@ -8,7 +8,7 @@ type Props = {
 export default function Providers({ children }: Props) {
   return (
     <>
-      <QueryProvider>{children}</QueryProvider>
+      <TRPCReactProvider>{children}</TRPCReactProvider>
     </>
   );
 }

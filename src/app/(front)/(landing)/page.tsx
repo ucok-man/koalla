@@ -100,7 +100,7 @@ export default function HomePage() {
           </h1>
 
           {/* Sub Heading */}
-          <p className="text-center max-w-2xl text-brand-primary-600 font-medium text-lg leading-7">
+          <p className="text-center max-w-2xl text-brand-primary-600 font-medium text-xl leading-relaxed">
             Koalla protects your memories, not just your phone.
             <br />
             Carry the moments you love everywhere you go.
@@ -113,7 +113,7 @@ export default function HomePage() {
                 size={"xl"}
                 className="rounded-full bg-gradient-to-b from-brand-primary-900 to-brand-desert-950 mix-blend-multiply hover:opacity-95"
               >
-                Order Now
+                Create Case
                 <span>
                   <ArrowRight />
                 </span>
@@ -123,7 +123,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section>
+      <section className="mb-24">
         <div className="w-full flex flex-col items-center justify-center gap-16">
           <div className="relative mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 h-[49rem] overflow-hidden">
             <ReviewColumn
@@ -146,7 +146,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section>
+      <section className="mb-24">
         <div className="w-full flex flex-col items-center justify-center gap-16">
           <h2 className="w-full text-center flex justify-center flex-col text-primary text-5xl font-semibold leading-tight tracking-tight">
             What our customers say

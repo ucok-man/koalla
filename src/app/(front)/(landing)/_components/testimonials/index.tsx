@@ -42,7 +42,7 @@ export default function Testimonials({ items }: Props) {
           />
 
           <div className="flex-1">
-            <p className="text-xl md:text-2xl font-medium text-brand-primary-800 mb-6 leading-relaxed">
+            <p className="text-xl md:text-xl font-medium text-brand-primary-800 mb-6 leading-relaxed">
               "{current.content}"
             </p>
             <div>
