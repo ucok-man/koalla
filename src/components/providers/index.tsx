@@ -1,4 +1,5 @@
 import { TRPCReactProvider } from "@/trpc/client";
+import { ClerkProvider } from "@clerk/nextjs";
 import { ReactNode } from "react";
 
 type Props = {
@@ -8,7 +9,9 @@ type Props = {
 export default function Providers({ children }: Props) {
   return (
     <>
-      <TRPCReactProvider>{children}</TRPCReactProvider>
+      <ClerkProvider>
+        <TRPCReactProvider>{children}</TRPCReactProvider>
+      </ClerkProvider>
     </>
   );
 }
