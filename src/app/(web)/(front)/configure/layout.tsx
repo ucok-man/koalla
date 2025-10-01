@@ -7,7 +7,7 @@ type Props = {
 
 export default function ConfigureLayout({ children }: Props) {
   return (
-    <div>
+    <div className="space-y-16">
       <Steps />
       {children}
     </div>

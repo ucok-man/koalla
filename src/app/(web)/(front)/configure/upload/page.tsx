@@ -12,14 +12,19 @@ import { toast } from "sonner";
 export default function UploadPage() {
   const [isDragOver, setIsDragOver] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
-  const [isPending, startTransition] = useTransition();
+  const [isRedirecting, startTransition] = useTransition();
   const router = useRouter();
 
   const { startUpload, isUploading } = useUploadThing("imageUploader", {
     onClientUploadComplete: ([data]) => {
+      console.log(data);
       startTransition(() => {
         router.push(`/configure/design?configId=${data.serverData.config.id}`);
       });
+    },
+    onUploadError: (err) => {
+      console.error(err);
+      toast.error(err.message);
     },
     onUploadProgress: setUploadProgress,
   });
@@ -41,7 +46,7 @@ export default function UploadPage() {
       return (
         <MousePointerSquareDashed className="h-6 w-6 text-brand-primary-500 mb-2" />
       );
-    if (isUploading || isPending)
+    if (isUploading || isRedirecting)
       return (
         <Loader2 className="animate-spin h-6 w-6 text-brand-primary-500 mb-2" />
       );
@@ -59,7 +64,7 @@ export default function UploadPage() {
           />
         </div>
       );
-    if (isPending) return <p>Redirecting, please wait...</p>;
+    if (isRedirecting) return <p>Redirecting, please wait...</p>;
     if (isDragOver)
       return (
         <p>
@@ -74,41 +79,44 @@ export default function UploadPage() {
   };
 
   return (
-    <div
-      className={cn(
-        "min-h-[calc(100vh-24rem)] w-full relative my-16 p-2 rounded-2xl ring-1 ring-inset",
-        "bg-brand-desert-900/5 ring-brand-desert-900/10",
-        "flex justify-center flex-col items-center",
-        isDragOver && "ring-brand-desert-900/25 bg-brand-desert-900/10"
-      )}
-    >
-      <Dropzone
-        onDropRejected={onDropRejected}
-        onDropAccepted={onDropAccepted}
-        accept={{
-          "image/png": [".png"],
-          "image/jpeg": [".jpeg"],
-          "image/jpg": [".jpg"],
-        }}
-        onDragEnter={() => setIsDragOver(true)}
-        onDragLeave={() => setIsDragOver(false)}
-      >
-        {({ getRootProps, getInputProps }) => (
-          <div
-            className="h-full w-full flex-1 flex flex-col items-center justify-center"
-            {...getRootProps()}
-          >
-            <input {...getInputProps()} />
-            {getIcon()}
-            <div className="flex flex-col justify-center mb-2 text-sm text-primary">
-              {getMessage()}
-            </div>
-            {!isPending && (
-              <p className="text-xs text-brand-primary-500">PNG, JPG, JPEG</p>
-            )}
-          </div>
+    <div className="sm:px-12">
+      <div
+        className={cn(
+          "min-h-[calc(100vh-24rem)] w-full relative p-2 rounded-2xl ring-1 ring-inset",
+          "bg-brand-desert-900/5 ring-brand-desert-900/10",
+          "flex justify-center flex-col items-center",
+          isDragOver && "ring-brand-desert-900/25 bg-brand-desert-900/10"
         )}
-      </Dropzone>
+      >
+        <Dropzone
+          onDropRejected={onDropRejected}
+          onDropAccepted={onDropAccepted}
+          accept={{
+            "image/png": [".png"],
+            "image/jpeg": [".jpeg"],
+            "image/jpg": [".jpg"],
+          }}
+          onDragEnter={() => setIsDragOver(true)}
+          onDragLeave={() => setIsDragOver(false)}
+          disabled={isUploading || isRedirecting}
+        >
+          {({ getRootProps, getInputProps }) => (
+            <div
+              className="h-full w-full flex-1 flex flex-col items-center justify-center"
+              {...getRootProps()}
+            >
+              <input {...getInputProps()} />
+              {getIcon()}
+              <div className="flex flex-col justify-center mb-2 text-sm text-primary">
+                {getMessage()}
+              </div>
+              {!isRedirecting && (
+                <p className="text-xs text-brand-primary-500">PNG, JPG, JPEG</p>
+              )}
+            </div>
+          )}
+        </Dropzone>
+      </div>
     </div>
   );
 }

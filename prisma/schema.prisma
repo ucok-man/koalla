@@ -46,7 +46,7 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  Order Order[]
+  orders Order[]
 }
 
 model Configuration {
@@ -59,7 +59,8 @@ model Configuration {
   material        CaseMaterial?
   finish          CaseFinish?
   croppedImageUrl String?
-  Order           Order[]
+
+  orders Order[]
 }
 
 model Order {
@@ -92,7 +93,8 @@ model ShippingAddress {
   country     String
   state       String?
   phoneNumber String?
-  orders      Order[]
+
+  orders Order[]
 }
 
 model BillingAddress {
@@ -104,5 +106,6 @@ model BillingAddress {
   country     String
   state       String?
   phoneNumber String?
-  orders      Order[]
+
+  orders Order[]
 }

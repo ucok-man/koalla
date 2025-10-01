@@ -58,15 +58,12 @@ export default function Steps() {
                     <div
                       className={cn(
                         "flex size-12 items-center justify-center rounded-full border-4 transition-all duration-300 shadow-lg border-brand-primary-200 bg-background",
-                        isCurrent && "border-secondary bg-brand-desert-100",
-                        isCompleted && "border-brand-desert-300 bg-secondary"
+                        (isCurrent || isCompleted) &&
+                          "border-secondary bg-brand-desert-100"
                       )}
                     >
                       {isCompleted ? (
-                        <Check
-                          className="size-6 text-brand-primary-600"
-                          strokeWidth={3}
-                        />
+                        <Check className="size-6 text-brand-primary-800" />
                       ) : (
                         <Icon
                           className={cn(
@@ -85,8 +82,7 @@ export default function Steps() {
                         className={cn(
                           "text-sm font-semibold transition-colors",
                           isCompleted && "text-brand-primary-700",
-                          isCurrent && "text-primary",
-                          !isCompleted && !isCurrent && "text-brand-primary-500"
+                          (isCurrent || isCompleted) && "text-primary"
                         )}
                       >
                         {step.name}

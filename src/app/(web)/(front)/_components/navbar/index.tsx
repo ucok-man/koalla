@@ -45,7 +45,7 @@ function NavbarContent() {
         </div>
       </Link>
 
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center hidden sm:flex">
         <SignedIn>
           <Button onClick={() => clerk.signOut()} size={"sm"} variant={"link"}>
             Sign Out
