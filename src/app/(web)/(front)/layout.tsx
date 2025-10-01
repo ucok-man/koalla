@@ -20,10 +20,10 @@ export default function FrontLayout({ children }: Props) {
         />
       </div>
 
-      <div className="flex w-full justify-center px-4 sm:px-6 xl-px-0">
+      <div className="flex w-full justify-center">
         <MaxWidthWrapper className="w-full relative min-h-screen border-x border-border">
           <Navbar />
-          {children}
+          <main className="px-4 py-8">{children}</main>
         </MaxWidthWrapper>
       </div>
     </div>

@@ -40,11 +40,11 @@ const TESTIMONIAL_ITEMS = [
 
 export default function HomePage() {
   return (
-    <div className="py-12 relative space-y-12">
-      <section>
+    <div className="relative space-y-12">
+      <section className="pt-12">
         <div className="w-full flex flex-col items-center justify-center gap-6">
           {/* Happy Customers */}
-          <div className="mt-12 flex flex-col sm:flex-row items-center sm:items-start gap-4">
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
             <div className="flex -space-x-4">
               {[
                 "/users/user-1.png",

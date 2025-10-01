@@ -2,6 +2,7 @@ import Providers from "@/components/providers";
 import type { Metadata } from "next";
 import { Instrument_Serif, Inter } from "next/font/google";
 import { ReactNode } from "react";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const inter = Inter({
@@ -36,7 +37,10 @@ export default function RootLayout({ children }: Props) {
         className={`${inter.variable} ${instrumentSerif.variable} antialiased font-sans`}
       >
         <Providers>
-          <div className="bg-brand-desert-50">{children}</div>
+          <div className="bg-brand-desert-50">
+            {children}
+            <Toaster />
+          </div>
         </Providers>
       </body>
     </html>
