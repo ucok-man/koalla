@@ -5,19 +5,19 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #222222;
+  --foreground: #454545;
   --card: #ffffff;
-  --card-foreground: #222222;
+  --card-foreground: #454545;
   --popover: #ffffff;
-  --popover-foreground: #222222;
-  --primary: #222222;
+  --popover-foreground: #454545;
+  --primary: #454545;
   --primary-foreground: #ffffff;
   --secondary: #ffffff;
-  --secondary-foreground: #222222;
+  --secondary-foreground: #454545;
   --muted: #dedede;
   --muted-foreground: #808080;
   --accent: #ffffff;
-  --accent-foreground: #222222;
+  --accent-foreground: #454545;
   --destructive: #e7000b;
   --destructive-foreground: #ffffff;
   --border: #e5e5e5;
@@ -29,11 +29,11 @@
   --chart-4: #1a4eda;
   --chart-5: #1f3fad;
   --sidebar: #ffffff;
-  --sidebar-foreground: #222222;
-  --sidebar-primary: #222222;
+  --sidebar-foreground: #454545;
+  --sidebar-primary: #454545;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #ffffff;
-  --sidebar-accent-foreground: #222222;
+  --sidebar-accent-foreground: #454545;
   --sidebar-border: #e5e5e5;
   --sidebar-ring: #bebebe;
   --font-sans: Inter, ui-sans-serif, sans-serif, system-ui;

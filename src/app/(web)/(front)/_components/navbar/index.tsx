@@ -78,7 +78,7 @@ function NavbarContent() {
           </Link>
         </SignedOut>
 
-        <Link href={"/configure"} passHref>
+        <Link href={"/configure/upload"} passHref>
           <Button size={"sm"} variant={"secondary"} className="rounded-full">
             Create Case <ArrowRight />
           </Button>

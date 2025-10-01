@@ -96,7 +96,7 @@ export default function HomePage() {
 
           {/* CTA */}
           <div className="gap-6 flex flex-col items-center justify-center mt-6">
-            <Link href={"/configure"} passHref>
+            <Link href={"/configure/upload"} passHref>
               <Button
                 size={"xl"}
                 className="rounded-full bg-gradient-to-b from-brand-primary-900 to-brand-desert-950 mix-blend-multiply hover:opacity-95"
@@ -176,7 +176,7 @@ export default function HomePage() {
             </ul>
 
             <div className="flex flex-col items-center justify-center">
-              <Link href={"/configure"} passHref>
+              <Link href={"/configure/upload"} passHref>
                 <Button
                   size={"xl"}
                   className="rounded-full bg-gradient-to-b from-brand-primary-900 to-brand-desert-950 mix-blend-multiply hover:opacity-95"
