@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import sharp from "sharp";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
+import z from "zod";
 
 const f = createUploadthing();
 
@@ -12,9 +13,14 @@ export const uploadImageRouter = {
       maxFileCount: 1,
     },
   })
+    .input(
+      z.object({
+        configId: z.string().trim().optional(),
+      })
+    )
     .middleware(async ({ input }) => {
       return {
-        input: input as undefined | { configId: string },
+        input: input,
       };
     })
     .onUploadComplete(async ({ metadata, file }) => {

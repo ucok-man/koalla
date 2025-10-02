@@ -21,13 +21,14 @@ import { useUploadThing } from "@/lib/uploadthing";
 import { cn, formatPrice } from "@/lib/utils";
 import { useTRPC } from "@/trpc/client";
 import { RadioGroup } from "@headlessui/react";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ArrowRight, Check, ChevronsUpDown, Loader } from "lucide-react";
 import NextImage from "next/image";
 import { useRouter } from "next/navigation";
 import { useMemo, useRef, useState, useTransition } from "react";
 import { Rnd } from "react-rnd";
 import { toast } from "sonner";
+import ContentLoading from "../_components/content-loading";
 
 type Props = {
   configId: string;
@@ -37,12 +38,12 @@ export default function Content({ configId }: Props) {
   const router = useRouter();
   const phoneCaseRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { startUpload } = useUploadThing("imageUploader");
+  const { startUpload, isUploading } = useUploadThing("imageUploader");
   const [isPending, setIsPending] = useState(false);
   const [isRedirecting, startTransition] = useTransition();
 
   const trpc = useTRPC();
-
+  const queryClient = useQueryClient();
   const config = useQuery(
     trpc.configuration.findById.queryOptions({ cid: configId })
   );
@@ -96,12 +97,10 @@ export default function Content({ configId }: Props) {
       let actualX = renderedPosition.x - (phone.left - container.left);
       let actualY = renderedPosition.y - (phone.top - container.top);
 
-      const thicknessPx = 30; // 8mm border in pixels
-
       // 3. Create canvas sized to phone + thickness on all sides
       const canvas = document.createElement("canvas");
-      canvas.width = phone.width + thicknessPx * 2;
-      canvas.height = phone.height + thicknessPx * 2;
+      canvas.width = phone.width;
+      canvas.height = phone.height;
       const ctx = canvas.getContext("2d");
       if (!ctx) throw new Error("Failed to get canvas context");
 
@@ -119,8 +118,8 @@ export default function Content({ configId }: Props) {
       // 5. Draw the image onto canvas
       ctx.drawImage(
         userImage,
-        actualX + thicknessPx, // where to start x, accomadate thickness
-        actualY + thicknessPx, // where to start y, accomadate thickness
+        actualX, // where to start x
+        actualY, // where to start y
         renderedDimension.width, // how wide
         renderedDimension.height // how tall
       );
@@ -147,8 +146,11 @@ export default function Content({ configId }: Props) {
         }),
       ]);
 
+      queryClient.invalidateQueries(
+        trpc.configuration.findById.queryOptions({ cid: configId })
+      );
       startTransition(() => {
-        router.push(`/configure/preview?id=${configId}`);
+        router.push(`/configure/preview?configId=${configId}`);
       });
     } catch (error) {
       console.error("handleContinue error:", error);
@@ -159,7 +161,7 @@ export default function Content({ configId }: Props) {
   };
 
   if (config.isPending) {
-    return <div>Loading...</div>;
+    return <ContentLoading />;
   }
 
   if (config.error) {
@@ -169,7 +171,7 @@ export default function Content({ configId }: Props) {
       toast.error("Oops! something went wrong 🙏");
     }
 
-    return <div>Loading...</div>;
+    return <ContentLoading />;
   }
 
   return (
@@ -418,12 +420,12 @@ export default function Content({ configId }: Props) {
               {formatPrice(totalPrice / 100)}
             </p>
             <Button
-              disabled={isPending || isRedirecting}
+              disabled={isPending || isRedirecting || isUploading}
               onClick={async () => handleContinue()}
               size="sm"
               className="w-full"
             >
-              {isPending ? (
+              {isPending || isUploading ? (
                 <>
                   Processing...
                   <Loader className="size-4 inline animate-spin" />

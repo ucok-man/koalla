@@ -151,7 +151,7 @@ export default function HomePage() {
           </h2>
           <div className="space-y-12">
             <div className="relative flex flex-col items-center gap-16 min-[900px]:flex-row min-[900px]:justify-center min-[900px]:gap-6">
-              <div className="relative w-full min-h-[580px] min-[900px]:justify-self-end max-w-sm rounded-xl ring-inset ring-ring/10 lg:rounded-2xl">
+              <div className="relative w-full min-[900px]:justify-self-end max-w-sm rounded-xl ring-inset ring-ring/10 lg:rounded-2xl">
                 <img
                   src="/horse.jpg"
                   className="rounded-md object-cover shadow-2xl ring-1 ring-ring/10 h-full w-full"
@@ -163,7 +163,7 @@ export default function HomePage() {
                 className="rotate-90 min-[900px]:rotate-0"
               />
 
-              <Phone className="w-60" img="/horse_phone.jpg" />
+              <Phone className="w-60" img="/horse_phone.jpg" bg="transparent" />
             </div>
 
             <ul className="mx-auto mt-12 max-w-prose sm:text-lg space-y-2 w-fit flex justify-center flex-col items-center">
