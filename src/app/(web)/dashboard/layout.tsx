@@ -6,7 +6,7 @@ type Props = {
   children: ReactNode;
 };
 
-export default function FrontLayout({ children }: Props) {
+export default function DashboardLayout({ children }: Props) {
   return (
     <div className="relative">
       <div className="fixed transform left-1/2 -translate-x-1/2 top-1/6 -translate-y-1/2 pointer-events-none w-full z-0">
