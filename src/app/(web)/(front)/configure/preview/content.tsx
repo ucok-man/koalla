@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import Confetti from "react-dom-confetti";
 import { toast } from "sonner";
-import ContentLoading from "../_components/content-loading";
+import ContentLoading from "../../_components/content-loading";
 
 type Props = {
   configId: string;

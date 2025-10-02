@@ -42,14 +42,14 @@ export default function Testimonials({ items }: Props) {
           />
 
           <div className="flex-1">
-            <p className="text-xl md:text-xl font-medium text-brand-primary-800 mb-6 leading-relaxed">
+            <p className="text-lg sm:text-xl font-medium text-brand-primary-800 mb-6 leading-relaxed">
               "{current.content}"
             </p>
             <div>
-              <p className="text-lg font-medium text-brand-primary-700">
+              <p className="text-base sm:text-lg font-medium text-brand-primary-700">
                 {current.name}
               </p>
-              <p className="text-lg text-brand-primary-600">
+              <p className="text-base sm:text-lg text-brand-primary-600">
                 {current.company}
               </p>
             </div>

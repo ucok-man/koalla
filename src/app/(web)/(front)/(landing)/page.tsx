@@ -81,15 +81,16 @@ export default function HomePage() {
           </div>
 
           {/* Main Heading */}
-          <h1 className="max-w-4xl text-primary font-serif text-[80px] font-normal leading-24 text-center">
+          <h1 className="max-w-4xl text-primary font-serif text-[80px] max-sm:text-6xl font-normal leading-24 text-center">
             Turn Your Memories Into
             <br />
             Custom Phone Case
           </h1>
 
           {/* Sub Heading */}
-          <p className="text-center max-w-2xl text-brand-primary-600 font-medium text-xl leading-relaxed">
-            Koalla protects your memories, not just your phone.
+          <p className="text-center max-w-2xl text-brand-primary-600 font-medium text-xl max-sm:text-lg leading-relaxed">
+            Koalla protects your memories
+            <span className="max-sm:hidden">not just your phone</span>.
             <br />
             Carry the moments you love everywhere you go.
           </p>
@@ -113,7 +114,7 @@ export default function HomePage() {
 
       <section className="mb-24">
         <div className="w-full flex flex-col items-center justify-center gap-16">
-          <div className="relative mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 h-[49rem] overflow-hidden">
+          <div className="relative mt-16 grid grid-cols-1 min-[1000px]:grid-cols-3 gap-8 h-[49rem] overflow-hidden">
             <ReviewColumn
               imgs={[REVIEW_IMAGES[0], REVIEW_IMAGES[1]]}
               speed={35}
@@ -121,10 +122,12 @@ export default function HomePage() {
             <ReviewColumn
               imgs={[REVIEW_IMAGES[2], REVIEW_IMAGES[3]]}
               speed={25}
+              className="max-[1000px]:hidden"
             />
             <ReviewColumn
               imgs={[REVIEW_IMAGES[4], REVIEW_IMAGES[5]]}
               speed={35}
+              className="max-[1000px]:hidden"
             />
 
             {/* Fade gradients */}
@@ -166,9 +169,9 @@ export default function HomePage() {
               <Phone className="w-60" img="/horse_phone.jpg" bg="transparent" />
             </div>
 
-            <ul className="mx-auto mt-12 max-w-prose sm:text-lg space-y-2 w-fit flex justify-center flex-col items-center">
+            <ul className="mx-auto mt-12 max-w-prose space-y-2 w-fit flex justify-center flex-col items-center">
               {FEATURE_HIGHLIGHTS.map((text, i) => (
-                <li key={i} className="w-fit">
+                <li key={i} className="w-fit sm:text-lg text-center">
                   <Check className="size-5 text-brand-desert-700 inline mr-1.5" />
                   {text}
                 </li>

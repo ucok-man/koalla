@@ -28,7 +28,7 @@ import { useRouter } from "next/navigation";
 import { useMemo, useRef, useState, useTransition } from "react";
 import { Rnd } from "react-rnd";
 import { toast } from "sonner";
-import ContentLoading from "../_components/content-loading";
+import ContentLoading from "../../_components/content-loading";
 
 type Props = {
   configId: string;
@@ -278,6 +278,7 @@ export default function Content({ configId }: Props) {
             {/* Colors Picker */}
             <RadioGroup
               value={options.color}
+              disabled={updateConfig.isPending || isUploading}
               onChange={(val) =>
                 setOptions((prev) => ({ ...prev, color: val }))
               }
@@ -288,6 +289,7 @@ export default function Content({ configId }: Props) {
                   <RadioGroup.Option
                     key={color.label}
                     value={color}
+                    disabled={updateConfig.isPending || isUploading}
                     className={({ active, checked }) =>
                       cn(
                         "relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 active:ring-0 focus:ring-0 active:outline-none focus:outline-none border-2 border-transparent",
@@ -323,6 +325,7 @@ export default function Content({ configId }: Props) {
                 <DropdownMenuContent>
                   {MODELS.options.map((model) => (
                     <DropdownMenuItem
+                      disabled={updateConfig.isPending || isUploading}
                       key={model.label}
                       className={cn(
                         "flex text-sm gap-1 items-center p-1.5 cursor-default hover:bg-zinc-100",
@@ -353,6 +356,7 @@ export default function Content({ configId }: Props) {
             {[MATERIALS, FINISHES].map(
               ({ name, options: selectableOptions }) => (
                 <RadioGroup
+                  disabled={updateConfig.isPending || isUploading}
                   key={name}
                   value={options[name]}
                   onChange={(val) =>

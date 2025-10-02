@@ -3,7 +3,13 @@
 import ThreeDotLoader from "@/components/three-dot-loader";
 import Image from "next/image";
 
-export default function ContentLoading() {
+type Props = {
+  text?: string;
+};
+
+export default function ContentLoading({
+  text = "Preparing your resources...",
+}: Props) {
   return (
     <div className="space-y-3 text-center h-full py-24 flex items-center justify-center flex-col">
       <div className="flex items-center gap-3 relative top-10">
@@ -21,9 +27,7 @@ export default function ContentLoading() {
 
       <ThreeDotLoader size="lg" />
 
-      <p className="text-muted-foreground text-base">
-        Preparing your resources...
-      </p>
+      <p className="text-muted-foreground text-base">{text}</p>
     </div>
   );
 }
