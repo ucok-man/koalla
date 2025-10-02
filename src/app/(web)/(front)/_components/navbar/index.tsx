@@ -1,7 +1,9 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { useTRPC } from "@/trpc/client";
 import { SignedIn, SignedOut, useClerk, useUser } from "@clerk/nextjs";
+import { useQuery } from "@tanstack/react-query";
 import { ArrowRight, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,9 +13,18 @@ function NavbarContent() {
   const { isLoaded, user } = useUser();
   const clerk = useClerk();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const trpc = useTRPC();
 
-  const email = user?.emailAddresses.at(0)?.emailAddress;
-  const isAdmin = email === process.env.ADMIN_EMAIL;
+  const isAdmin = useQuery(
+    trpc.user.isAdmin.queryOptions(undefined, {
+      enabled: !!user,
+    })
+  );
+
+  // const email = user?.emailAddresses.at(0)?.emailAddress;
+  // const isAdmin = email === process.env.ADMIN_EMAIL;
+
+  // console.log(process.env.ADMIN_EMAIL);
 
   // Close mobile menu when clicking on a link
   const handleLinkClick = () => setMobileMenuOpen(false);
@@ -86,7 +97,7 @@ function NavbarContent() {
 
             <div className="w-[1.5px] h-6 bg-border mx-1" />
 
-            {isAdmin && (
+            {isAdmin.data === true && (
               <Link href={"/dashboard"} passHref className="mr-1">
                 <Button size={"sm"} variant={"link"}>
                   Dashboard ✨
@@ -135,7 +146,7 @@ function NavbarContent() {
           <div className="bg-brand-desert-50 rounded-2xl shadow-lg border-2 border-white mx-4 p-4 backdrop-blur-sm">
             <div className="flex flex-col gap-2">
               <SignedIn>
-                {isAdmin && (
+                {isAdmin.data === true && (
                   <Link href={"/dashboard"} passHref onClick={handleLinkClick}>
                     <Button
                       size={"sm"}

@@ -1,5 +1,5 @@
 import z from "zod";
-import { createTRPCRouter, publicProcedure } from "../init";
+import { createTRPCRouter, privateProcedure, publicProcedure } from "../init";
 
 export const userRouter = createTRPCRouter({
   sync: publicProcedure
@@ -20,4 +20,8 @@ export const userRouter = createTRPCRouter({
         update: input,
       });
     }),
+
+  isAdmin: privateProcedure.query(({ ctx }) => {
+    return ctx.user.email === process.env.ADMIN_EMAIL;
+  }),
 });
