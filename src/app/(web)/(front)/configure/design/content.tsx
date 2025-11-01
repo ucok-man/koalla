@@ -1,5 +1,6 @@
 "use client";
 
+import ContentLoading from "@/components/content-loading";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
 import {
@@ -28,7 +29,6 @@ import { useRouter } from "next/navigation";
 import { useMemo, useRef, useState, useTransition } from "react";
 import { Rnd } from "react-rnd";
 import { toast } from "sonner";
-import ContentLoading from "../../_components/content-loading";
 
 type Props = {
   configId: string;

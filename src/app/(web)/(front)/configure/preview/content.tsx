@@ -1,5 +1,6 @@
 "use client";
 
+import ContentLoading from "@/components/content-loading";
 import Phone from "@/components/phone";
 import { Button } from "@/components/ui/button";
 import { BASE_PRICE, COLORS, MODELS, PRODUCT_PRICES } from "@/lib/products";
@@ -12,7 +13,6 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import Confetti from "react-dom-confetti";
 import { toast } from "sonner";
-import ContentLoading from "../../_components/content-loading";
 
 type Props = {
   configId: string;

@@ -1,9 +1,9 @@
 "use client";
 
+import ContentLoading from "@/components/content-loading";
 import { formatPrice } from "@/lib/utils";
 import { useTRPC } from "@/trpc/client";
 import { useQuery } from "@tanstack/react-query";
-import ContentLoading from "../_components/content-loading";
 import PhoneWithHand from "../_components/phone-with-hand";
 
 type Props = {

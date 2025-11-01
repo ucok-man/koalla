@@ -1,17 +1,25 @@
 "use client";
 
 import ThreeDotLoader from "@/components/three-dot-loader";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 type Props = {
   text?: string;
+  classname?: string;
 };
 
 export default function ContentLoading({
   text = "Preparing your resources...",
+  classname,
 }: Props) {
   return (
-    <div className="space-y-3 text-center h-full py-24 flex items-center justify-center flex-col">
+    <div
+      className={cn(
+        "space-y-3 text-center h-full py-24 flex items-center justify-center flex-col",
+        classname
+      )}
+    >
       <div className="flex items-center gap-3 relative top-10">
         <Image
           src="/brand-logo-sleep.png"
