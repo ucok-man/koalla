@@ -62,6 +62,7 @@ export async function POST(req: Request) {
         },
       });
 
+      // TODO: send thankyou email
       //   await resend.emails.send({
       //     from: "CaseCobra <hello@joshtriedcoding.com>",
       //     to: [event.data.object.customer_details.email],

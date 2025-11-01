@@ -21,8 +21,37 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Koalla",
-  description: "TODO",
+  title: {
+    default: "Koalla - Custom Phone Cases for Your Memories",
+    template: "%s | Koalla",
+  },
+  description:
+    "Turn your precious memories into beautiful custom phone cases. High-quality, durable cases with 5-year print warranty. Wireless charging compatible with scratch-resistant coating.",
+  keywords: [
+    "custom phone case",
+    "personalized phone case",
+    "photo phone case",
+    "iPhone case",
+    "custom iPhone case",
+    "memory phone case",
+    "durable phone case",
+    "wireless charging case",
+  ],
+  authors: [{ name: "ucokman" }],
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
+  ),
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 

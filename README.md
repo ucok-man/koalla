@@ -1,36 +1,121 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Koalla
 
-## Getting Started
+Koalla is a full-stack e-commerce application that empowers users to transform their cherished photos into high-quality custom phone cases.
 
-First, run the development server:
+**Live** : [https://koalla.ucokman.web.id](https://koalla.ucokman.web.id)
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js 20+
+- PostgreSQL
+- Uploadthing
+- Ngrok
+- Clerk account
+- Stripe account
+
+### 1. Clone & Install
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repo-url>
+cd pinguins
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Setup Tunneling for Webhooks
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Ngrok allows you to expose your local server to the internet for webhook testing.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Login to ngrok**  
+   Visit [https://dashboard.ngrok.com/login](https://dashboard.ngrok.com/login)
 
-## Learn More
+2. **Install ngrok**  
+   Follow the instructions under **Getting Started → Setup & Installation**
 
-To learn more about Next.js, take a look at the following resources:
+3. **Configure and run ngrok**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   ngrok config add-authtoken <your-auth-token>
+   ngrok http --url=<YOUR_FORWARDING_URL> <your-app-running-port>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   # Keep this terminal window open - you'll need the forwarding URL for webhook configuration
+   ```
 
-## Deploy on Vercel
+### 3. Setup Clerk Authentication
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Login to Clerk**  
+   Visit [https://dashboard.clerk.com/sign-in](https://dashboard.clerk.com/sign-in)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. **Create a new application**  
+   Navigate to **Application → Dashboard** and create a new application
+
+3. **Configure sign-in options**  
+   Enable **Email** and **Google** as sign-in methods
+
+4. **Get your API keys**  
+   Go to **Configure → Developers → API Keys** and copy:
+   - `CLERK_PUBLISHABLE_KEY`
+   - `CLERK_SECRET_KEY`
+
+### 4. Setup Uploadthing Storage
+
+1. **Login to Uploadthing**
+   Visit [https://uploadthing.com/sign-in](https://uploadthing.com/sign-in)
+
+2. **Create a new application**
+   Navigate to **Dashboard** and create a new application
+
+3. **Get your Uploadthing Token**  
+   Go to **API Keys** and copy:
+   - `UPLOADTHING_TOKEN`
+
+### 5. Get Discord Guild ID
+
+1. Enable **Developer Mode** in Discord  
+   Go to **App Settings → Advanced** and toggle on Developer Mode
+
+2. Get your server ID
+   - Right-click on your private server icon in the left sidebar
+   - Click **Copy Server ID** to get your `DISCORD_GUILD_ID`
+
+### 6. Setup Stripe Payments
+
+1. **Login to Stripe**  
+   Visit [https://dashboard.stripe.com/login](https://dashboard.stripe.com/login)
+
+2. **Get your API key**
+
+   - Open the **Workbench Panel** at the bottom of the page
+   - Under **Overview**, copy your `STRIPE_SECRET_KEY`
+
+3. **Setup webhooks**
+   - Navigate to **Webhooks**
+   - Click **Add destination**
+   - Select all **checkout events**
+   - Set destination to: `<YOUR_FORWARDING_URL>/api/webhooks/stripe`
+   - Get your <WEBHOOK_SECRET>
+
+### 7. Configure Environment Variables
+
+```bash
+cp .env.example .env
+# fill in all the credentials you collected
+```
+
+### 8. Setup Database
+
+```bash
+pnpm prisma migrate dev
+```
+
+### 9. Run Development Server
+
+Start the application:
+
+```bash
+pnpm run dev
+```
+
+**Your app is now running!** 🎊  
+Visit [http://localhost:3000](http://localhost:3000) to see it in action.
