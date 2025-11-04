@@ -52,7 +52,7 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [{ rel: "icon", url: "/brand-logo-primary.png" }],
 };
 
 type Props = {
